@@ -17,7 +17,7 @@ class BinaryTree{
         }
     }
 
-    public void RemoveValue(int value){
+    public void removeValue(int value){
         if (_root != null) {
             if (_root.value == value) {
                 Node leftNode = _root.leftNode;
@@ -31,9 +31,13 @@ class BinaryTree{
                 currentNode.leftNode = leftNode;
             }
             else {
-                _root.RemoveValue(value);
+                _root.removeValue(value);
             }
         }
+    }
+
+    public Boolean findValue(int value){
+        return false;
     }
 }
 

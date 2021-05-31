@@ -40,22 +40,38 @@ class Node {
         System.out.println(value);
     }
 
-    public void RemoveValue(int value){
+    public void removeValue(int value){
         if (value < this.value) {
-            if (value == leftNode.value) {
-                
+            if (value == this.leftNode.value) {
+                Node leftNode = this.leftNode.leftNode;
+                this.leftNode = this.leftNode.rightNode;
+
+                Node currentNode = this.leftNode;
+                while (currentNode.leftNode != null) {
+                    currentNode = currentNode.leftNode;   
+                }
+
+                currentNode.leftNode = leftNode;
             }
             else {
-                leftNode.RemoveValue(value);
+                this.leftNode.removeValue(value);
             }
         }
 
         if (value > this.value) {
-            if (value == rightNode.value) {
-                
+            if (value == this.rightNode.value) {
+                Node rightNode = this.rightNode.rightNode;
+                this.rightNode = this.rightNode.leftNode;
+
+                Node currentNode = this.rightNode;
+                while (currentNode.rightNode != null) {
+                    currentNode = currentNode.rightNode;   
+                }
+
+                currentNode.rightNode = rightNode;
             }
             else {
-                rightNode.RemoveValue(value);
+                this.rightNode.removeValue(value);
             }
         }
     }
