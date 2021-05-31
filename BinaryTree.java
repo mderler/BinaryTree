@@ -29,7 +29,8 @@ class BinaryTree{
                 }
 
                 currentNode.leftNode = leftNode;
-            }else{
+            }
+            else {
                 _root.RemoveValue(value);
             }
         }

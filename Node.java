@@ -16,7 +16,8 @@ class Node {
             else {
                 leftNode = new Node(value);
             }
-        }else {
+        }
+        else {
             if (rightNode != null) {
                 rightNode.addValue(value);
             }
@@ -40,8 +41,22 @@ class Node {
     }
 
     public void RemoveValue(int value){
-        if (value == leftNode.value) {
-            
-        }   
+        if (value < this.value) {
+            if (value == leftNode.value) {
+                
+            }
+            else {
+                leftNode.RemoveValue(value);
+            }
+        }
+
+        if (value > this.value) {
+            if (value == rightNode.value) {
+                
+            }
+            else {
+                rightNode.RemoveValue(value);
+            }
+        }
     }
 }
