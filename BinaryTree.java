@@ -32,6 +32,7 @@ class BinaryTree{
             }
             else {
                 _root.removeValue(value);
+                System.out.println(_root.rightNode);
             }
         }
     }
