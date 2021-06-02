@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class BinaryTree{
     private Node _root;
     
@@ -47,8 +50,11 @@ class BinaryTree{
         }
     }
 
-    public Boolean findValue(int value) {
-        return false;
+    public char[] getPath(int value) {
+        
+        return null;
+
+        
     }
 }
 
