@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class BinaryTree{
     private Node _root;
     
@@ -20,25 +23,47 @@ class BinaryTree{
     public void removeValue(int value){
         if (_root != null) {
             if (_root.value == value) {
-                Node leftNode = _root.leftNode;
-                _root = _root.rightNode;
-                
-                Node currentNode = _root;
-                while (currentNode.leftNode != null) {
-                    currentNode = currentNode.leftNode;   
-                }
+                if (_root.rightNode != null) {
+                    Node leftNode = _root.leftNode;
+                    _root = _root.rightNode;
+                    Node currentNode = _root;
 
-                currentNode.leftNode = leftNode;
-            }
-            else {
+                    while (currentNode.leftNode != null) {
+                        currentNode = currentNode.leftNode;
+                    }
+
+                    currentNode.leftNode = leftNode;
+                }else if(_root.leftNode != null) {
+                    Node rightNode = _root.rightNode;
+                    _root = _root.leftNode;
+                    Node currentNode = _root;
+
+                    while (currentNode.rightNode != null) {
+                        currentNode = currentNode.rightNode;
+                    }
+
+                    currentNode.leftNode = rightNode;
+                }else {
+                    _root = null;
+                }
+            }else {
                 _root.removeValue(value);
-                System.out.println(_root.rightNode);
             }
         }
     }
 
-    public Boolean findValue(int value){
-        return false;
+    public char[] getPath(int value) {
+        
+        return null;
+
+        
+    }
+
+    public int getCount() {
+        if (_root != null) {
+            return _root.getCount();
+        }
+        return 0;
     }
 }
 

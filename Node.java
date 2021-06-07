@@ -9,7 +9,7 @@ class Node {
     }
 
     public void addValue(int value){
-        if (this.value < value) {
+        if (value < this.value) {
             if (leftNode != null) {
                 leftNode.addValue(value);
             }
@@ -41,17 +41,37 @@ class Node {
     }
 
     public void removeValue(int value){
+
         if (value < this.value) {
+
+            if (this.leftNode == null) {
+                return;
+            }
+
             if (value == this.leftNode.value) {
-                Node leftNode = this.leftNode.leftNode;
-                this.leftNode = this.leftNode.rightNode;
+                if (this.leftNode.rightNode != null) {
+                    Node leftNode = this.leftNode.leftNode;
+                    this.leftNode = this.leftNode.rightNode;
+                    Node currentNode = this.leftNode;
 
-                Node currentNode = this.leftNode;
-                while (currentNode.leftNode != null) {
-                    currentNode = currentNode.leftNode;   
+                    while (currentNode.leftNode != null) {
+                        currentNode = currentNode.leftNode;
+                    }
+
+                    currentNode.leftNode = leftNode;
+                }else if(this.leftNode.leftNode != null) {
+                    Node rightNode = this.leftNode.rightNode;
+                    this.leftNode = this.leftNode.leftNode;
+                    Node currentNode = this.leftNode;
+
+                    while (currentNode.rightNode != null) {
+                        currentNode = currentNode.rightNode;
+                    }
+
+                    currentNode.leftNode = rightNode;
+                }else {
+                    this.leftNode = null;
                 }
-
-                currentNode.leftNode = leftNode;
             }
             else {
                 this.leftNode.removeValue(value);
@@ -59,20 +79,53 @@ class Node {
         }
 
         if (value > this.value) {
+
+            if (this.rightNode == null) {
+                return;
+            }
+
             if (value == this.rightNode.value) {
-                Node rightNode = this.rightNode.rightNode;
-                this.rightNode = this.rightNode.leftNode;
+                if (this.rightNode.rightNode != null) {
+                    Node leftNode = this.rightNode.leftNode;
+                    this.rightNode = this.rightNode.rightNode;
+                    Node currentNode = this.rightNode;
 
-                Node currentNode = this.rightNode;
-                while (currentNode.rightNode != null) {
-                    currentNode = currentNode.rightNode;   
+                    while (currentNode.leftNode != null) {
+                        currentNode = currentNode.leftNode;
+                    }
+
+                    currentNode.leftNode = leftNode;
+                }else if(this.rightNode.leftNode != null) {
+                    Node rightNode = this.rightNode.rightNode;
+                    this.rightNode = this.rightNode.leftNode;
+                    Node currentNode = this.rightNode;
+
+                    while (currentNode.rightNode != null) {
+                        currentNode = currentNode.rightNode;
+                    }
+
+                    currentNode.leftNode = rightNode;
+                }else {
+                    this.rightNode = null;
                 }
-
-                currentNode.rightNode = rightNode;
             }
             else {
                 this.rightNode.removeValue(value);
             }
         }
+    }
+
+    public int getCount()
+    {
+        int c = 1;
+        if (leftNode != null) {
+            c += leftNode.getCount();
+        }
+
+        if (rightNode != null) {
+            c += rightNode.getCount();
+        }
+
+        return c;
     }
 }
